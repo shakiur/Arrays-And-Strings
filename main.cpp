@@ -6,18 +6,24 @@ using namespace std;
 // Find first non-repeated character
 char findNonRepeatedChar(string);
 
+// Remove all chars in string2 from string1
 string removeCharFromString(string, string);
+
+// Reverse all words from string 
+string reverseWords(string);
 
 int main() {
     string test1 = "total";
+
     string test2 = "Battle of the Vowels: Hawaii vs. Grozny";
-    string rmv_test2 = "aeiou";
+    string test2_rmv = "aeiou";
 
     char first_char = findNonRepeatedChar(test1);
 
-    string new_test = removeCharFromString(test2, rmv_test2);
+    string new_test = removeCharFromString(test2, test2_rmv);
 
-    cout << new_test << endl;
+    string new_test2 = reverseWords(test2);
+
     
 }
 
@@ -76,5 +82,57 @@ string removeCharFromString(string orig_str, string rmv_str) {
 
     return new_str;
 
+
+}
+
+string reverseWords(string orig_str) {
+
+    // If orig_str is empty, return empty string
+    if(orig_str == "")
+        return orig_str;
+
+    string reverse_str = "";
+
+    int orig_len = orig_str.length();
+    int orig_num_words = 1;
+
+    // Find total number of words;
+    for(int i = 0; i < orig_len; i++) {
+        if(orig_str[i] == ' ')
+            orig_num_words++;
+    }
+
+    // Array to hold all words in original string
+    string orig_words_arr[orig_num_words];
+    
+    // Write words to new arr
+    string temp_word;
+    int orig_indx = 0;
+
+    for(int i = 0; i < orig_len; i++) {
+
+        char temp_c = orig_str[i];
+
+        if(temp_c == ' ') {
+            orig_words_arr[orig_indx] = temp_word;
+            temp_word = "";
+            orig_indx++;
+        }
+        else {
+            temp_word += temp_c;
+        }
+
+    }
+
+    // Write last word to array
+    orig_words_arr[orig_indx] = temp_word;
+
+    // Place reversed array in string
+    for(int i = orig_indx; i >= 0; i--) {
+        reverse_str += orig_words_arr[i]+" "; 
+
+    }
+
+    return reverse_str;
 
 }
