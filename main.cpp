@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "math.h"
 
 using namespace std;
 
@@ -12,19 +13,18 @@ string removeCharFromString(string, string);
 // Reverse all words from string 
 string reverseWords(string);
 
+// Converts a string to a signed int
+int stringToInt(string);
+
+// Converts single char digit to int
+int getDigitFromChar(char);
+
+// Converts a signed int to string
+string intToString(int);
+
 int main() {
-    string test1 = "total";
-
-    string test2 = "Battle of the Vowels: Hawaii vs. Grozny";
-    string test2_rmv = "aeiou";
-
-    char first_char = findNonRepeatedChar(test1);
-
-    string new_test = removeCharFromString(test2, test2_rmv);
-
-    string new_test2 = reverseWords(test2);
-
     
+
 }
 
 char findNonRepeatedChar(string test) {
@@ -135,4 +135,80 @@ string reverseWords(string orig_str) {
 
     return reverse_str;
 
+}
+
+int stringToInt(string str_int) {
+
+    int str_int_len = str_int.length();
+
+    int result = 0;
+    bool is_neg = false;
+
+    for(int i = 0; i < str_int_len; i++) {
+        
+        
+        if(str_int[i] == '-') {
+
+            // If minus is found, need to make negative eventually
+            is_neg = true;
+
+        }
+        else {
+
+            // Find each individual digit
+            int num = getDigitFromChar(str_int[i]);
+
+            // Multiply digit by power of 10 that corresponds to its place
+            result += num*pow(10,str_int_len-i);
+            
+        }
+
+    }
+
+    if(is_neg) {
+        result *= -1;
+    }
+
+    return result;
+
+}
+
+int getDigitFromChar(char digit) {
+
+    int digit_int;
+
+    switch(digit) {
+        case '0':
+            digit_int = 0;
+            break;
+        case '1':
+            digit_int = 1;
+            break;
+        case '2':
+            digit_int = 2;
+            break;
+        case '3':
+            digit_int = 3;
+            break;
+        case '4':
+            digit_int = 4;
+            break;
+        case '5':
+            digit_int = 5;
+            break;
+        case '6':
+            digit_int = 6;
+            break;
+        case '7':
+            digit_int = 7;
+            break;
+        case '8':
+            digit_int = 8;
+            break;
+        case '9':
+            digit_int = 9;
+            break;
+    }
+
+    return digit_int;
 }
