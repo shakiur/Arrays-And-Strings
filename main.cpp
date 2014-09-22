@@ -24,7 +24,7 @@ string intToString(int);
 
 int main() {
     
-
+   
 }
 
 char findNonRepeatedChar(string test) {
@@ -159,8 +159,8 @@ int stringToInt(string str_int) {
             int num = getDigitFromChar(str_int[i]);
 
             // Multiply digit by power of 10 that corresponds to its place
-            result += num*pow(10,str_int_len-i);
-            
+            result += num*pow(10,(str_int_len-1)-i);
+
         }
 
     }
