@@ -13,6 +13,8 @@ string removeCharFromString(string, string);
 // Reverse all words from string 
 string reverseWords(string);
 
+string reverseWordsNoBuffer(string);
+
 // Converts a string to a signed int
 int stringToInt(string);
 
@@ -23,7 +25,7 @@ int getDigitFromChar(char);
 string intToString(int);
 
 int main() {
-    
+    reverseWordsNoBuffer("My little brown dog");
    
 }
 
@@ -136,6 +138,48 @@ string reverseWords(string orig_str) {
     return reverse_str;
 
 }
+
+string reverseWordsNoBuffer(string orig_str){
+    if(orig_str == "")
+        return orig_str;
+
+    int orig_str_len = orig_str.length();
+    int begin = 0;
+
+    // Reverse entire string, letter by letter
+    for(int i = (orig_str_len - 1); i > begin; i--) {
+
+        char temp = orig_str[i];
+
+        orig_str[i] = orig_str[begin];
+        orig_str[begin] = temp;
+
+        begin++;
+    }
+
+    // Reverse each individual word in string
+    int begin_word = 0;
+    for(int i = 0; i < orig_str_len; i++) {
+
+        if(orig_str[i] == ' ') {
+            for(int k = i; k >= begin_word; k--) {
+                cout << orig_str[k];
+
+            }
+            cout << endl;
+            begin_word = i;
+        }
+
+    }
+
+
+
+    cout << orig_str;
+    cout << endl;
+    return orig_str;
+}
+
+
 
 int stringToInt(string str_int) {
 
