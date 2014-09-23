@@ -13,6 +13,9 @@ string removeCharFromString(string, string);
 // Reverse all words from string 
 string reverseWords(string);
 
+// Reverses all words without creating copy of string
+string reverseWordsNoBuffer(string);
+
 // Converts a string to a signed int
 int stringToInt(string);
 
@@ -23,7 +26,7 @@ int getDigitFromChar(char);
 string intToString(int);
 
 int main() {
-    
+
    
 }
 
@@ -134,6 +137,69 @@ string reverseWords(string orig_str) {
     }
 
     return reverse_str;
+
+}
+
+string reverseWordsNoBuffer(string orig_str) {
+
+    string reverse_str = "";
+
+    if(orig_str == "")
+        return reverse_str;
+
+    int orig_str_len = orig_str.length();
+
+    int orig_str_begin = 0;
+
+    // Reverse entire original string
+    for(int i = (orig_str_len-1); i > orig_str_begin; i--) {
+
+        char temp = orig_str[i];
+        orig_str[i] = orig_str[orig_str_begin];
+        orig_str[orig_str_begin] = temp;
+
+        orig_str_begin++;
+    }
+
+    // Reverse each individual word
+    int word_begin = 0;
+
+    for(int i = 0; i < orig_str_len; i++) {
+
+        if(orig_str[i] == ' ') {
+            
+            for(int k = i-1; k > word_begin; k--) {
+
+                char temp = orig_str[k];
+                orig_str[k] = orig_str[word_begin];
+                orig_str[word_begin] = temp;
+
+                word_begin++;
+            }
+            
+            word_begin = (i+1);
+
+        }
+
+        // Reverse last word
+        if(i == orig_str_len-1) {
+
+            for(int k = i; k > word_begin; k--) {
+
+                char temp = orig_str[k];
+                orig_str[k] = orig_str[word_begin];
+                orig_str[word_begin] = temp;
+
+                word_begin++;
+            }
+
+        }
+
+    }
+
+    cout << orig_str << endl;
+    cout << endl;
+    return orig_str;
 
 }
 
